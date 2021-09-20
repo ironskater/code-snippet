@@ -1,2 +1,2 @@
 # snippet-lib
-code snippet for variety snippet
+code snippet for variety languages
