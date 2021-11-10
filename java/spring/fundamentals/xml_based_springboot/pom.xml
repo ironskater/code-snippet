@@ -1,0 +1,82 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>codesnippet.spring.fundamentals</groupId>
+	<artifactId>xml_based_springboot</artifactId>
+
+	<packaging>jar</packaging>
+
+	<name>xml_based_springboot</name>
+	<version>1.0-SNAPSHOT</version>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<java.version>11</java.version>
+		<maven.compiler.source>${java.version}</maven.compiler.source>
+		<maven.compiler.target>${java.version}</maven.compiler.target>
+
+		<spring-boot-starter>2.5.6</spring-boot-starter>
+
+		<classpath>libs</classpath>
+		<main_class>codesnippet.spring.fundamentals.App</main_class>
+	</properties>
+
+	<build>
+		<plugins>
+			<!-- Build an executable JAR -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>2.4</version>
+					<configuration>
+					<archive>
+						<manifest>
+							<!-- addClasspath: 是否要在MANIFEST.MF加上classpath的資訊，若要建立executable jar，必為true -->
+							<addClasspath>true</addClasspath>
+							<!-- classpathPrefix: 對MANIFEST.MF裡的classpath加上前綴，等於打包dependencies的outputDirectory -->
+							<classpathPrefix>${classpath}</classpathPrefix>
+							<mainClass>${main_class}</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<!-- outputDirectory: dependencies打包後所存放的位置 -->
+							<!-- ${project.build.directory} refer到 pom所在位置/target -->
+							<!-- classpath定義在上面的properties裡 -->
+							<outputDirectory>${project.build.directory}/${classpath}</outputDirectory>
+
+							<overWriteReleases>false</overWriteReleases>
+							<overWriteSnapshots>false</overWriteSnapshots>
+							<overWriteIfNewer>true</overWriteIfNewer>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+			<version>${spring-boot-starter}</version>
+		</dependency>
+		<dependency>
+			<groupId>codesnippet.java_utility</groupId>
+			<artifactId>logger</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+</project>
