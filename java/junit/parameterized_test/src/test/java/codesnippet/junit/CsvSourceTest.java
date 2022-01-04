@@ -19,11 +19,12 @@ public class CsvSourceTest
 {
 	@ParameterizedTest
 	@CsvSource(value = {
-		"1, One", // One前面有無空格都沒關係
-		"2, Two",
-		"3, Three"
+		"1, One ",
+		"2, Two ",
+		"3, Three "
 	},
-	delimiter = ',') // default delimiter is ,
+	delimiter = ',',
+	ignoreLeadingAndTrailingWhitespace = false) // default is true, since 5.8
 	public void
 		testDataFromCsv(long id, String name)
 	{
