@@ -7,7 +7,6 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 
 import codesnippet.java_utility.Slf4jLogger;
-import codesnippet.spring.fundamentals.component.ICoach;
 
 @ComponentScan
 public class App
@@ -22,15 +21,7 @@ public class App
 				SpringApplication.run(	App.class,
 										args))
 		{
-			ICoach theCoach;
-
-			theCoach = ctx.getBean("baseballCoach", ICoach.class);
-			LOGGER.info("\n" + theCoach.getDailyWorkout());
-
-			theCoach = ctx.getBean("footballCoach", ICoach.class);
-			LOGGER.info("\n" + theCoach.getDailyWorkout());
-
-			theCoach = ctx.getBean("trackCoach", ICoach.class);
+			ICoach theCoach = ctx.getBean("myCoach", ICoach.class);
 			LOGGER.info("\n" + theCoach.getDailyWorkout());
 		}
 		catch(Exception ex)
