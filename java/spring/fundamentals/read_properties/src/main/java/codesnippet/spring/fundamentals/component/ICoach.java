@@ -1,4 +1,4 @@
-package codesnippet.spring.fundamentals;
+package codesnippet.spring.fundamentals.component;
 
 public interface ICoach
 {
