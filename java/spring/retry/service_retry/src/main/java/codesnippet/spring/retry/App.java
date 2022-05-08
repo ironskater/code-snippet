@@ -8,6 +8,8 @@ import org.springframework.retry.annotation.EnableRetry;
 /**
  * spring-retry
  * 1. Add EnableRetry annotation
+ * 2. Add @Retryable and @Recover to BookService methods
+ * 3. access http://localhost:8080/api/v1/book
  */
 @EnableRetry
 @SpringBootApplication
