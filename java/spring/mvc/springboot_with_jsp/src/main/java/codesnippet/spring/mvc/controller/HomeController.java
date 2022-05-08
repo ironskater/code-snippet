@@ -1,4 +1,4 @@
-package codesnippet.springmvc.controller;
+package codesnippet.spring.mvc.controller;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;

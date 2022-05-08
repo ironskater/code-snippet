@@ -1,4 +1,4 @@
-package codesnippet.springmvc.controller;
+package codesnippet.spring.mvc.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
