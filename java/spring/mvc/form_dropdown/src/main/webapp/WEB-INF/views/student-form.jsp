@@ -22,12 +22,8 @@
 
 			<!-- on submit, spring will call student.setCountry(...) -->
 			<form:select path="country">
-				<!-- The label is what the user will actually see on the screen -->
-				<!-- The value is the actual code that you will pass over when you submit -->
-				<form:option value="Brazil valueeeeeee" label="Brazil" />
-				<form:option value="France valueeeeeee" label="France" />
-				<form:option value="Germany valueeeeeee" label="Germany" />
-				<form:option value="India valueeeeeee" label="India" />
+				<!-- 'items' refer to the collection of data -->
+				<form:options items="${student.countryByOptions}" />
 			</form:select>
 
 			<br><br>
