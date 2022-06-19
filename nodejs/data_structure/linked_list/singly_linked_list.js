@@ -91,6 +91,32 @@ class LinkedList
 		return this;
 	}
 
+	// null --> 1 --> 10 --> 5 --> 16
+	reverse()
+	{
+		if(!this.head || !this.head.next) {
+			return this;
+		}
+
+		const nodeAry = [null, this.head, this.head.next];
+		this.tail = this.head;
+
+		do {
+			nodeAry[1].next = nodeAry[0];
+
+			if(!nodeAry[2]) {
+				this.head = nodeAry[1];
+				break;
+			}
+
+			nodeAry[0] = nodeAry[1];
+			nodeAry[1] = nodeAry[2];
+			nodeAry[2] = nodeAry[2].next;
+		} while(true);
+
+		return this;
+	}
+
 	toPrintable()
 	{
 		const array = [];
@@ -108,6 +134,7 @@ class LinkedList
 }
 
 const myLinkedList = new LinkedList(10);
+
 for(let ix = 0; ix < 2; ix++)
 {
 	myLinkedList.append(ix);
@@ -138,3 +165,13 @@ for(let ix = 0, originalLength = myLinkedList.length;
 	myLinkedList.remove(0);
 	console.log(myLinkedList.toPrintable());
 }
+
+// test reverse
+// 1 --> 2 --> 3 --> 4
+const list = new LinkedList(1);
+list.append(2);
+list.append(3);
+list.append(4);
+
+console.log('before revserse: %s', list.toPrintable());
+console.log('after revserse: %s', list.reverse().toPrintable());
