@@ -117,6 +117,123 @@ class BinarySearchTree
 		}
 	}
 
+    breadthFirstTraversalByIterative()
+    {
+        let rtn = [];
+        let queue = [this.root];
+
+        while(queue.length > 0) {
+            let currentNode = queue.shift();
+            rtn.push(currentNode.value);
+            console.log('push value: ', currentNode.value);
+
+            if(currentNode.left) {
+                queue.push(currentNode.left);
+            }
+            if(currentNode.right) {
+                queue.push(currentNode.right);
+            }
+        }
+
+        return rtn;
+    }
+
+    breadthFirstTraversalByRecursive()
+    {
+        const rtn = [];
+
+        this._breadthFirstTraversalByRecursiveHelper([this.root], rtn);
+
+        return rtn;
+    }
+
+    _breadthFirstTraversalByRecursiveHelper(queue, list)
+    {
+        if(!queue.length) {
+            return list;
+        }
+
+        let currentNode = queue.shift();
+
+        list.push(currentNode.value);
+
+        if(currentNode.left) {
+            queue.push(currentNode.left);
+        }
+
+        if(currentNode.right) {
+            queue.push(currentNode.right);
+        }
+
+        return this._breadthFirstTraversalByRecursiveHelper(queue, list);
+    }
+
+    depthFirstSearchInorder()
+    {
+        const rtn = [];
+        this._depthFirstSearchInorderHelper(this.root, rtn);
+        return rtn;
+    }
+
+    _depthFirstSearchInorderHelper(node, list)
+    {
+        if(node.left) {
+            this._depthFirstSearchInorderHelper(node.left, list);
+        }
+
+        list.push(node.value);
+
+        if(node.right) {
+            this._depthFirstSearchInorderHelper(node.right, list);
+        }
+
+        return;
+    }
+
+    depthFirstSearchPreorder()
+    {
+        const rtn = [];
+        this._depthFirstSearchPreorderHelper(this.root, rtn);
+        return rtn;
+    }
+
+    _depthFirstSearchPreorderHelper(node, list)
+    {
+        list.push(node.value);
+
+        if(node.left) {
+            this._depthFirstSearchPreorderHelper(node.left, list);
+        }
+
+        if(node.right) {
+            this._depthFirstSearchPreorderHelper(node.right, list);
+        }
+
+        return;
+    }
+
+    depthFirstSearchPostorder()
+    {
+        const rtn = [];
+        this._depthFirstSearchPostorderHelper(this.root, rtn);
+        return rtn;
+    }
+
+    _depthFirstSearchPostorderHelper(node, list)
+    {
+        if(node.left) {
+            this._depthFirstSearchPostorderHelper(node.left, list);
+        }
+
+        if(node.right) {
+            this._depthFirstSearchPostorderHelper(node.right, list);
+        }
+
+        list.push(node.value);
+
+        return;
+    }
+
 	remove(value) {
 		if(!this.root) {
 			return false;
@@ -238,6 +355,18 @@ tree.insertByRecursive(20);
 tree.insertByRecursive(170);
 tree.insertByRecursive(15);
 tree.insertByRecursive(1);
+
+// breadth first traversal
+console.log('breadth first traversal by iterative: ', tree.breadthFirstTraversalByIterative());
+console.log('breadth first traversal by recursive: ', tree.breadthFirstTraversalByRecursive());
+
+// depth first traversal
+// inorder: [1, 4, 6, 9, 15, 20, 170]
+console.log('depth first traversal by inorder: ', tree.depthFirstSearchInorder());
+// preorder: [9, 4, 1, 6, 20, 15, 170]
+console.log('depth first traversal by preorder: ', tree.depthFirstSearchPreorder());
+// postorder: [1, 6, 4, 15, 170, 20, 9]
+console.log('depth first traversal by postorder: ', tree.depthFirstSearchPostorder());
 
 // expected tree structure
 //        9
