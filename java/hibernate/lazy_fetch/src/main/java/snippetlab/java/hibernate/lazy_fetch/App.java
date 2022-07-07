@@ -73,7 +73,14 @@ public class App
 			System.out.println("=============================================");
 			System.out.println("Instructor: " + tempInstructor);
 			System.out.println("=============================================");
-			// Courses only loaded on demand
+
+			/**
+			 * Because the session is closed, tempInstructor.getCourses() throws LazyInitializationException
+			 *
+			 * Exception in thread "main" org.hibernate.LazyInitializationException:
+			 * failed to lazily initialize a collection of role: snippetlab.java.hibernate.lazy_fetch.Instructor.courses,
+			 * could not initialize proxy - no Session
+			 */
 			System.out.println("Courses: " + tempInstructor.getCourses());
 			System.out.println("=============================================");
 
