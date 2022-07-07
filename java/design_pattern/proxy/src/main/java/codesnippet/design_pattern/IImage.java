@@ -1,4 +1,4 @@
-package snippetlab.java.design_pattern.proxy;
+package codesnippet.design_pattern;
 
 public interface IImage
 {

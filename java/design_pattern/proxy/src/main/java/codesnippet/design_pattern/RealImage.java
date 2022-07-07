@@ -1,6 +1,6 @@
-package snippetlab.java.design_pattern.proxy;
+package codesnippet.design_pattern;
 
-public final class RealImage implements IImage
+public class RealImage implements IImage
 {
 	private String fileName;
 
