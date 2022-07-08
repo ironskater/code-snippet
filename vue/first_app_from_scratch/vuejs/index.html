@@ -11,10 +11,14 @@
       <div>
         <label for="goal">Goal</label>
         <input type="text" id="goal" v-model="enteredValue"/>
+
+		<!-- calling addGoal mehtod in app.js -->
         <button v-on:click="addGoal">Add Goal</button>
       </div>
       <ul>
         <li>Test</li>
+
+		<!-- goals is an array -->
 		<li v-for="goal in goals">{{ goal }}</li>
       </ul>
     </div>
