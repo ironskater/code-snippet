@@ -15,7 +15,7 @@
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
 
-		<spring-boot-starter>2.6.3</spring-boot-starter>
+		<spring-boot-starter>2.6.6</spring-boot-starter>
 
 		<classpath>libs</classpath>
 		<main_class>codesnippet.spring.security.App</main_class>
