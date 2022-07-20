@@ -14,6 +14,12 @@ public class App
         public Integer
             call()
         {
+            try {
+                Thread.sleep(5000);
+            } catch(InterruptedException itrEx) {
+                itrEx.printStackTrace();
+            }
+
             System.out.println("hello world");
             return 56;
         }
@@ -24,6 +30,7 @@ public class App
     {
         ExecutorService executor = Executors.newSingleThreadExecutor();
         Future<Integer> future = executor.submit(new PrintTask());
+        System.out.println("waiting for result...");
         System.out.println("future result: " + future.get().intValue());
         executor.shutdown();
     }
