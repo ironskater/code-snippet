@@ -10,6 +10,13 @@ public class App
 {
     private static class PrintTask implements Callable<Integer>
     {
+        private int param;
+
+        public PrintTask(int param)
+        {
+            this.param = param;
+        }
+
         @Override
         public Integer
             call()
@@ -21,7 +28,7 @@ public class App
             }
 
             System.out.println("hello world");
-            return 56;
+            return this.param;
         }
     }
 
@@ -29,9 +36,22 @@ public class App
         main( String[] args ) throws InterruptedException, ExecutionException
     {
         ExecutorService executor = Executors.newSingleThreadExecutor();
-        Future<Integer> future = executor.submit(new PrintTask());
+        Future<Integer> future1 = executor.submit(new PrintTask(5566));
+
+        Future<Integer> future2 = executor.submit(new Callable<Integer>() {
+
+            @Override
+            public Integer
+                call() throws Exception
+            {
+                System.out.println("hello baby world");
+                return 2266;
+            }
+        });
+
         System.out.println("waiting for result...");
-        System.out.println("future result: " + future.get().intValue());
+        System.out.println("future1 result: " + future1.get().intValue());
+        System.out.println("future2 result: " + future2.get().intValue());
         executor.shutdown();
     }
 }
