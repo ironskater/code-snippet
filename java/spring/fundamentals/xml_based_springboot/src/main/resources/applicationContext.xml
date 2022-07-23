@@ -7,11 +7,27 @@
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context.xsd">
 
+	<context:property-placeholder location="classpath:application.properties"/>
+
     <!-- Define your beans here -->
-	<!-- class="codesnippet.spring.fundamentals.FootballCoach"> -->
-	<!-- class="codesnippet.spring.fundamentals.BaseballCoach"> -->
+	<bean id="myFortuneService"
+		class="codesnippet.spring.fundamentals.service.HappyFortuneService">
+	</bean>
+
+	<!-- constructor inject -->
 	<bean id="myCoach"
 		class="codesnippet.spring.fundamentals.BaseballCoach">
+		<constructor-arg ref="myFortuneService" />
+	</bean>
+
+	<!-- setter inject -->
+	<bean id="myFootballCoach"
+		class="codesnippet.spring.fundamentals.FootballCoach">
+		<property name="fortuneService" ref="myFortuneService" />
+
+		<property name="emailAddress" value="xxxx@gmail.com" />
+		<property name="team" value="${foo.team}" />
+		<property name="age" value="${foo.age}" />
 	</bean>
 
 </beans>
