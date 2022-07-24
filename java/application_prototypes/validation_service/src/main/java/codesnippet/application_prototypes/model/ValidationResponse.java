@@ -1,0 +1,14 @@
+package codesnippet.application_prototypes.model;
+
+public class ValidationResponse
+{
+    private String result;
+
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
+    }
+}
