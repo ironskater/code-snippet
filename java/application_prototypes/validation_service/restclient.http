@@ -1,0 +1,25 @@
+GET http://localhost:8080/books HTTP/1.1
+Accept: application/json
+
+###
+POST http://localhost:8080/books HTTP/1.1
+Content-Type: application/json
+Accept: */*
+
+[
+	{
+		"title": "boooook1",
+		"author": "hyde liao"
+	},
+	{
+		"title": "boooook2",
+		"author": "jjjaio"
+	}
+]
+
+###
+DELETE http://localhost:8080/books/3 HTTP/1.1
+
+###
+GET http://localhost:8080/validation?password=123ab HTTP/1.1
+Accept: */*
