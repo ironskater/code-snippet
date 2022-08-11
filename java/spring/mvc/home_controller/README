@@ -1,2 +1,10 @@
-Accessing static file:
-* localhost:8080/resources/image/panda.jpg
+* basic example for springboot + jsp
+* input data to form, and show the input-data on displayed page
+* data flow
+	* GET http://localhost:8080/
+		-> Go to HomeController.home(), and return main-menu.jsp
+		-> GET http://localhost:8080/showForm
+		-> Go to HelloWorldController.showForm(), and return helloworld-form.jsp
+		-> GET http://localhost:8080/processForm?studentName=hyde
+		-> GO to HelloWorldController.processForm(), and return helloworld.jsp
+		-> show ${param.studentName}
