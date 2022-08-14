@@ -1,0 +1,10 @@
+* basic example for springboot + jsp
+* input data to form, and show the input-data on displayed page
+* data flow
+	* GET http://localhost:8080/
+		-> Go to HomeController.home(), and return main-menu.jsp
+		-> GET http://localhost:8080/showForm
+		-> Go to HelloWorldController.showForm(), and return helloworld-form.jsp
+		-> GET http://localhost:8080/upperCase?studentName=hyde
+		-> GO to HelloWorldController.upperCase(), assign value of studentName to model.message, and return helloworld.jsp
+		-> show ${message}
