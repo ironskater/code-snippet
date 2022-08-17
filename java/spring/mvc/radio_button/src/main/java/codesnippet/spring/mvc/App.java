@@ -4,24 +4,19 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
-/**
- * If we need to deploy in a web container, we need to extend SpringBootServletInitializer.
- * This binds our application's Servlet, Filter, and ServletContextInitializer to the runtime server,
- * which is necessary for our application to run
- */
+
 @SpringBootApplication
 public class App extends SpringBootServletInitializer
 {
+    /**
+     * 使用springboot作部署時，預設外部tomcat不能讀取到main method，故須繼承SpringBootServletInitializer並實作configure
+     */
     @Override
-    protected SpringApplicationBuilder
-        configure(SpringApplicationBuilder builder)
-    {
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
         return builder.sources(App.class);
     }
 
-    public static void
-        main( String[] args )
-    {
+    public static void main(String[] args) {
         SpringApplication.run(App.class);
     }
 }

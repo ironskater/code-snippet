@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Student Confirmation</title>
-	</head>
-
-	<body>
-		The student is confirmed: ${student.firstName} ${student.lastName}
-	</body>
+    <head>
+        <title>
+            Student Confirmation Page
+        </title>
+    </head>
+    <body>
+        <!--
+        ${student.firstName} equals student.getFirstName()
+        ${student.lastName} equals student.getLastName() -->
+        The student is confirmed: ${student.firstName} ${student.lastName}
+        <br><br>
+        Favorite language is ${student.favoriteLanguage}
+    </body>
 </html>

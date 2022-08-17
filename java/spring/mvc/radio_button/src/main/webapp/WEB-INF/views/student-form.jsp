@@ -2,25 +2,21 @@
 
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Student registration title</title>
-	</head>
+    <body>
+        <form:form action = "processForm" modelAttribute = "student">
+            First name: <form:input path = "firstName" />
+            <br><br>
 
-	<body>
-		<form:form action="processForm" modelAttribute="student">
-			<!-- firstName is the property of Student class -->
-			First Name: <form:input path="firstName" />
+            Last name: <form:input path = "lastName" />
+            <br><br>
 
-			<br><br>
+            Favorite Language:
+            Java <form:radiobutton path = "favoriteLanguage" value = "Java" />
+            C# <form:radiobutton path = "favoriteLanguage" value = "C#" />
+            PHP <form:radiobutton path = "favoriteLanguage" value = "PHP" />
+            Ruby <form:radiobutton path = "favoriteLanguage" value = "Ruby" />
 
-			<!--lastName is also the property of Student class -->
-			Last Name: <form:input path="lastName" />
-
-			<br><br>
-
-			<!-- when submit, spring will call setFirstName and setLastName setter methods -->
-			<input type="submit" value="Submit" />
-
-		</form:form>
-	</body>
+            <input type = "submit" value = "Submit_Button" />
+        </form:form>
+    </body>
 </html>

@@ -12,7 +12,9 @@
 	<groupId>codesnippet.spring.mvc</groupId>
 	<artifactId>radio_button</artifactId>
 	<version>1.0-SNAPSHOT</version>
-	<packaging>jar</packaging>
+
+	<!-- 若打包成jar，不會包含jsp文件，故訪問頁面時會返回404；反之若打包為war，則包含jsp -->
+	<packaging>war</packaging>
 
 	<name>radio_button</name>
 
@@ -38,26 +40,25 @@
 			<artifactId>spring-boot-starter-log4j2</artifactId>
 		</dependency>
 
-		<!-- To avoid dependencies provided by our application clashing with the ones provided by the Tomcat runtime,
-		we need to set spring-boot-starter-tomcat and tomcat-embed-jasper with provided scope
-		-->
-		<!-- Note that we had to explicitly define spring-boot-starter-tomcat and mark it with the provided scope.
-		This is because it was already a transitive dependency provided by spring-boot-starter-web. -->
+		<!-- 排除springboot自帶的tomcat，以防止打包後因與外部tomcat衝突而導致啟動失敗 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
 		</dependency>
+
+		<!-- 用於編譯jsp -->
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-jasper</artifactId>
-			<version>9.0.62</version>
+			<!-- provided表示不用一起打包，會由外部提供，若打包進去會與外部tomcat產生衝突 -->
 			<scope>provided</scope>
 		</dependency>
+
+		<!-- 允許jsp頁面使用jstl標籤 -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
-			<version>1.2</version>
 		</dependency>
 	</dependencies>
 </project>
