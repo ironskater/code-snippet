@@ -1,0 +1,35 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+						http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+						http://www.liquibase.org/xml/ns/dbchangelog
+						http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+	<changeSet id="1" author="Hyde" logicalFilePath="changeLog/20220822235000-crm_init.xml">
+		<tagDatabase tag="0" />
+	</changeSet>
+
+	<changeSet id="2" author="Hyde" logicalFilePath="changeLog/20220822235000-crm_init.xml">
+		<sql>
+			CREATE TABLE customer (
+				id int NOT NULL GENERATED ALWAYS AS IDENTITY,
+				first_name varchar(45) DEFAULT NULL,
+				last_name varchar(45) DEFAULT NULL,
+				email varchar(45) DEFAULT NULL,
+				CONSTRAINT customer_pk PRIMARY KEY(id)
+			);
+
+			INSERT INTO customer(first_name, last_name, email)
+			VALUES
+				('David','Adams','david@luv2code.com'),
+				('John','Doe','john@luv2code.com'),
+				('Ajay','Rao','ajay@luv2code.com'),
+				('Mary','Public','mary@luv2code.com'),
+				('Maxwell','Dixon','max@luv2code.com');
+		</sql>
+		<rollback>
+			DROP TABLE IF EXISTS customer;
+		</rollback>
+	</changeSet>
+
+</databaseChangeLog>
