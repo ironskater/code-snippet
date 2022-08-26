@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class TextLengthValidatorTest
+public class TextLengthValidatorUnitTest
 {
     @Autowired
     private TextLengthValidator textLengthValidator;

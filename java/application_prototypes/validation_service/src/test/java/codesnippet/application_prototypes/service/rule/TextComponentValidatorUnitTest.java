@@ -10,36 +10,36 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class TextRepeatValidatorTest
+public class TextComponentValidatorUnitTest
 {
     @Autowired
-    private TextRepeatValidator textRepeatValidator;
+    private TextComponentValidator textComponentValidator;
 
     @ParameterizedTest
-    @ValueSource(strings = {"", "a", "1", "ab", "12", "a1", "1a", "a1ba1"})
-    public void validate_notContainRepeatSequence_shouldReturnTrue(String text) {
+    @ValueSource(strings = {"1a", "a1", "1a2b", "a1b2"})
+    public void validate_lowercaseLetterAndDigitOnlyWithAtLeastOneOfEach_shouldReturnTrue(String text) {
         // Arrange
         // Act
-        boolean actual = this.textRepeatValidator.validate(text);
+        boolean actual = this.textComponentValidator.validate(text);
 
         // Assert
         assertThat(actual)
-            .as("check the text[%s], it should not contain any sequence of characters "
-                    + "immediately followed by the same sequence", text)
+            .as("check the text[%s], it should consist of a mixture of lowercase letters and numerical digits only, "
+                    + "with at least one of each.", text)
             .isTrue();
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"aa", "abab", "11", "1212", "ab12ab12", "ab12ab123", "3ab12ab12"})
-    public void validate_containRepeatSequence_shouldReturnFalse(String text) {
+    @ValueSource(strings = {"", "a", "1", "1aB"})
+    public void validate_notLowercaseLetterAndDigitOnlyWithAtLeastOneOfEach_shouldReturnFalse(String text) {
         // Arrange
         // Act
-        boolean actual = this.textRepeatValidator.validate(text);
+        boolean actual = this.textComponentValidator.validate(text);
 
         // Assert
         assertThat(actual)
-            .as("check the text[%s], it should contain any sequence of characters "
-                    + "immediately followed by the same sequence", text)
+            .as("check the text[%s], it should not consist of a mixture of "
+                    + "lowercase letters and numerical digits only, with at least one of each.", text)
             .isFalse();
     }
 
@@ -50,7 +50,7 @@ public class TextRepeatValidatorTest
         // Act
         // Assert
         assertThatThrownBy(() -> {
-            this.textRepeatValidator.validate(text);
+            this.textComponentValidator.validate(text);
         }).isInstanceOf(NullPointerException.class);
     }
 }
