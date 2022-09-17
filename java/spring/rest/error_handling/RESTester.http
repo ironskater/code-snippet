@@ -1,0 +1,8 @@
+### GET normal
+GET http://localhost:8080/api/students/1 HTTP/1.1
+
+### GET null
+GET http://localhost:8080/api/students/3 HTTP/1.1
+
+### GET out of bound
+GET http://localhost:8080/api/students/4 HTTP/1.1
