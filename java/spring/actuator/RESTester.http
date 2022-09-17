@@ -1,0 +1,33 @@
+### health, this endpoint no need authentication
+GET http://localhost:8080/actuator/health HTTP/1.1
+
+### First, GET _csrf
+GET http://localhost:8080/login HTTP/1.1
+
+### Second, POST with _csrf
+@session=AEA40F249E60B30F8EB3322AE52CC96B
+@csrf=73fa3886-6f78-4153-bdbf-e380d8ca5605
+@pw=803360bf-9f8c-49ce-a607-b9542df77e9b
+POST http://localhost:8080/login HTTP/1.1
+Content-Type: application/x-www-form-urlencoded;charset=utf-8
+Cookie: JSESSIONID={{session}}
+
+username=user&password={{pw}}&_csrf={{csrf}}
+
+### Third, use the authenticated session id to execute the following request
+@authenticatedSession=E582FA38626FCE05D5D737E7869B0E74
+### info
+GET http://localhost:8080/actuator/info HTTP/1.1
+Cookie: JSESSIONID={{authenticatedSession}}
+
+### beans
+GET http://localhost:8080/actuator/beans HTTP/1.1
+Cookie: JSESSIONID={{authenticatedSession}}
+
+### threaddump
+GET http://localhost:8080/actuator/threaddump HTTP/1.1
+Cookie: JSESSIONID={{authenticatedSession}}
+
+### mappings
+GET http://localhost:8080/actuator/mappings HTTP/1.1
+Cookie: JSESSIONID={{authenticatedSession}}
