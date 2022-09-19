@@ -21,7 +21,7 @@
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
 
-		<postgresql-driver>42.3.3</postgresql-driver>
+		<postgresql-driver>42.4.1</postgresql-driver>
 
 		<classpath>libs</classpath>
 		<main_class>codesnippet.application_prototypes.App</main_class>
