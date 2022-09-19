@@ -1,0 +1,41 @@
+### find all
+GET http://localhost:8080/api/members HTTP/1.1
+Accept: application/json
+
+### find by page
+GET http://localhost:8080/api/members?page=2&size=2 HTTP/1.1
+Accept: application/json
+
+### sort by last name desc
+GET http://localhost:8080/api/members?sort=lastName,desc HTTP/1.1
+Accept: application/json
+
+### find by id
+GET http://localhost:8080/api/members/16 HTTP/1.1
+Accept: application/json
+
+### create
+POST http://localhost:8080/api/members HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{
+	"firstName": "Hyde",
+	"lastName": "Liao",
+	"email": "mail@gmail.com"
+}
+
+### update
+PUT http://localhost:8080/api/members/16 HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{
+	"firstName": "Hyde",
+	"lastName": "Liaooooooooooo",
+	"email": "mail@gmail.com"
+}
+
+### delete by id
+DELETE http://localhost:8080/api/members/16 HTTP/1.1
+Accept: application/json
