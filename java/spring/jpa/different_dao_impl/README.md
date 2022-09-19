@@ -1,0 +1,1 @@
+* This example demos the entity manager for native hibernate API and standard JPA API
