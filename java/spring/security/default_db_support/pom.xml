@@ -22,7 +22,7 @@
 		<java.version>11</java.version>
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
-		<postgresql-driver>42.3.3</postgresql-driver>
+		<postgresql-driver>42.3.7</postgresql-driver>
 	</properties>
 
 	<dependencies>
