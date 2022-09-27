@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Employees Demo</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <dev class="container">
+        <h3>Employee Directory</h3>
+        <hr>
+
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="item : ${employees}">
+                    <td th:text="${item.firstName}" />
+                    <td th:text="${item.lastName}" />
+                    <td th:text="${item.email}" />
+                </tr>
+            </tbody>
+        </table>
+    </dev>
+</body>
+
+</html>
