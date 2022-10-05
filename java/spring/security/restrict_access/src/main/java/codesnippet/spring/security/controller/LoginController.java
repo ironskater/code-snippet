@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class LoginController {
+
     @GetMapping("/custom-loginPage")
     public String customLoginPage() {
         // return "plain-login";
