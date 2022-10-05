@@ -11,13 +11,13 @@
 	</parent>
 
 	<groupId>codesnippet.spring.security</groupId>
-	<artifactId>access_denied_page</artifactId>
+	<artifactId>hide_content_by_role</artifactId>
 	<version>1.0</version>
 
 	<!-- 若打包成jar，不會包含jsp文件，故訪問頁面時會返回404；反之若打包為war，則包含jsp -->
 	<packaging>war</packaging>
 
-	<name>access_denied_page</name>
+	<name>hide_content_by_role</name>
 
 	<properties>
 		<java.version>11</java.version>
