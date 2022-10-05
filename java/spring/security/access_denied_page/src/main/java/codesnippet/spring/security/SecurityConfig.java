@@ -52,6 +52,9 @@ public class SecurityConfig {
                         .loginProcessingUrl("/authenticateTheUser")
                         .permitAll()
                 ).logout(configurer -> configurer.permitAll())
+                .exceptionHandling(configurer -> configurer
+				    .accessDeniedPage("/access-denied")
+                )
                 .build();
     }
 }
