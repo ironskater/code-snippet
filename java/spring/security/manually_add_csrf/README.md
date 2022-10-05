@@ -1,0 +1,1 @@
+* Manually add csrf token in fancy-login.jsp, and use the normal form tag
