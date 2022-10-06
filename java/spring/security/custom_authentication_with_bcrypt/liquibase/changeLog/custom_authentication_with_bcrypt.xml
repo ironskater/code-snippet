@@ -1,0 +1,83 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+						http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+						http://www.liquibase.org/xml/ns/dbchangelog
+						http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+	<changeSet id="0" author="Hyde" logicalFilePath="changeLog/custom_authentication_with_bcrypt.xml">
+		<tagDatabase tag="0" />
+	</changeSet>
+
+	<changeSet id="1" author="Hyde" logicalFilePath="changeLog/custom_authentication_with_bcrypt.xml">
+		<comment>
+			This is bcrypt strategy
+			Here we change length of password to 68, because {bcrypt} is 8 chars, and encoded password is 60 chars
+		</comment>
+		<sql>
+			CREATE TABLE users (
+				id int8 NOT NULL GENERATED ALWAYS AS IDENTITY,
+				username varchar(50) NOT NULL,
+				password varchar(80) NOT NULL,
+				first_name varchar(50) NOT NULL,
+				last_name varchar(50) NOT NULL,
+				email varchar(50) NOT NULL,
+
+				CONSTRAINT users_pk PRIMARY KEY(id)
+			);
+
+			INSERT INTO users(username, password, first_name, last_name, email)
+			VALUES
+				('john','$2a$10$lYK9DPqiNRPnD0ZlYFBvQurbNwcEgeGBI1J.xmeDIv5DWPRlDvpiy','John','Doe','john@ggmail.com'),
+				('mary','$2a$10$lYK9DPqiNRPnD0ZlYFBvQurbNwcEgeGBI1J.xmeDIv5DWPRlDvpiy','Mary','Public','mary@ggmail.com'),
+				('susan','$2a$10$lYK9DPqiNRPnD0ZlYFBvQurbNwcEgeGBI1J.xmeDIv5DWPRlDvpiy','Susan','Adams','susan@ggmail.com');
+		</sql>
+		<rollback>
+			DROP TABLE IF EXISTS users;
+		</rollback>
+	</changeSet>
+
+	<changeSet id="2" author="Hyde" logicalFilePath="changeLog/custom_authentication_with_bcrypt.xml">
+		<sql>
+			CREATE TABLE roles (
+				id int8 NOT NULL GENERATED ALWAYS AS IDENTITY,
+				name varchar(50) DEFAULT NULL,
+
+				CONSTRAINT roles_pk PRIMARY KEY(id)
+			);
+
+			INSERT INTO roles(name)
+			VALUES
+				('ROLE_EMPLOYEE'),
+				('ROLE_MANAGER'),
+				('ROLE_ADMIN');
+		</sql>
+		<rollback>
+			DROP TABLE IF EXISTS roles;
+		</rollback>
+	</changeSet>
+
+	<changeSet id="3" author="Hyde" logicalFilePath="changeLog/custom_db_support_init.xml">
+		<sql>
+			CREATE TABLE users_roles (
+				user_id int8 NOT NULL,
+				role_id int8 NOT NULL,
+
+				CONSTRAINT users_roles_fk1 FOREIGN KEY (user_id) REFERENCES "users"(id),
+				CONSTRAINT users_roles_fk2 FOREIGN KEY (role_id) REFERENCES "roles"(id),
+				CONSTRAINT users_roles_pk PRIMARY KEY(user_id, role_id)
+			);
+
+			INSERT INTO users_roles
+			VALUES
+				(1, 1),
+				(2, 1),
+				(2, 2),
+				(3, 1),
+				(3, 3);
+		</sql>
+		<rollback>
+			DROP TABLE IF EXISTS users_roles;
+		</rollback>
+	</changeSet>
+</databaseChangeLog>
