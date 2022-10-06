@@ -32,3 +32,4 @@ target/
 *.travis.yml
 .factorypath
 node_modules
+**.DS_store
