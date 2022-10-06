@@ -1,0 +1,84 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+						http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+						http://www.liquibase.org/xml/ns/dbchangelog
+						http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+	<changeSet id="1" author="Hyde" logicalFilePath="changeLog/default_db_support_init.xml">
+		<tagDatabase tag="0" />
+	</changeSet>
+
+	<!-- <changeSet id="2" author="Hyde" logicalFilePath="changeLog/default_db_support_init.xml">
+		<comment>
+			This is plain text strategy
+		</comment>
+		<sql>
+			CREATE TABLE users (
+				username varchar(50) NOT NULL,
+				password varchar(50) NOT NULL,
+				enabled int2 NOT NULL,
+
+				CONSTRAINT users_pk PRIMARY KEY(username)
+			);
+
+			INSERT INTO users
+			VALUES
+				('john','{noop}test123',1),
+				('mary','{noop}test123',1),
+				('susan','{noop}test123',1);
+		</sql>
+		<rollback>
+			DROP TABLE IF EXISTS users;
+		</rollback>
+	</changeSet> -->
+
+	<changeSet id="2" author="Hyde" logicalFilePath="changeLog/default_db_support_init.xml">
+		<comment>
+			This is bcrypt strategy
+			Here we change length of password to 68, because {bcrypt} is 8 chars, and encoded password is 60 chars
+		</comment>
+		<sql>
+			CREATE TABLE users (
+				username varchar(50) NOT NULL,
+				password varchar(68) NOT NULL,
+				enabled int2 NOT NULL,
+
+				CONSTRAINT users_pk PRIMARY KEY(username)
+			);
+
+			INSERT INTO users
+			VALUES
+				('john','{bcrypt}$2a$10$lYK9DPqiNRPnD0ZlYFBvQurbNwcEgeGBI1J.xmeDIv5DWPRlDvpiy',1),
+				('mary','{bcrypt}$2a$10$lYK9DPqiNRPnD0ZlYFBvQurbNwcEgeGBI1J.xmeDIv5DWPRlDvpiy',1),
+				('susan','{bcrypt}$2a$10$lYK9DPqiNRPnD0ZlYFBvQurbNwcEgeGBI1J.xmeDIv5DWPRlDvpiy',1);
+		</sql>
+		<rollback>
+			DROP TABLE IF EXISTS users;
+		</rollback>
+	</changeSet>
+
+	<changeSet id="3" author="Hyde" logicalFilePath="changeLog/default_db_support_init.xml">
+		<sql>
+			CREATE TABLE authorities (
+				username varchar(50) NOT NULL,
+				authority varchar(50) NOT NULL,
+
+				CONSTRAINT authorities_uk1 UNIQUE (username, authority),
+				CONSTRAINT authorities_fk1 FOREIGN KEY (username) REFERENCES "users"(username) ON DELETE CASCADE
+			);
+
+			INSERT INTO authorities
+			VALUES
+				('john','ROLE_EMPLOYEE'),
+				('mary','ROLE_EMPLOYEE'),
+				('mary','ROLE_MANAGER'),
+				('susan','ROLE_EMPLOYEE'),
+				('susan','ROLE_ADMIN');
+		</sql>
+		<rollback>
+			DROP TABLE IF EXISTS authorities;
+		</rollback>
+	</changeSet>
+
+</databaseChangeLog>
