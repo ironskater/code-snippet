@@ -1,0 +1,1 @@
+* By setup the @TestPropertySource("/application-test.properties") or @TestPropertySource("/application.properties"), we can switch different test properties
