@@ -1,0 +1,1 @@
+* This example uses embedded h2 database to do integration test

@@ -1,0 +1,5 @@
+INSERT INTO student(firstname, lastname, email_address) VALUES ('first1', 'last1', 'email1')
+INSERT INTO student(firstname, lastname, email_address) VALUES ('first2', 'last2', 'email2')
+INSERT INTO student(firstname, lastname, email_address) VALUES ('first3', 'last3', 'email3')
+INSERT INTO student(firstname, lastname, email_address) VALUES ('first4', 'last4', 'email4')
+INSERT INTO student(firstname, lastname, email_address) VALUES ('first5', 'last5', 'email5')
