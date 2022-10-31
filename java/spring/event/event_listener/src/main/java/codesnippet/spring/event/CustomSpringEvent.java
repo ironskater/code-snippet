@@ -8,14 +8,14 @@ import org.springframework.context.ApplicationEvent;
  * Therefore, Spring events no longer need to extend the ApplicationEvent class.
  */
 public final class CustomSpringEvent
-	extends ApplicationEvent // comment it that the code still works
+	// extends ApplicationEvent // comment it that the code still works
 {
 	private String message;
 
 	public CustomSpringEvent(	Object source,
 								String message)
 	{
-		super(source);
+		// super(source);
 		this.message = message;
 	}
 

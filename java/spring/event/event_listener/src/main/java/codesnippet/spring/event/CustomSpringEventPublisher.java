@@ -1,18 +1,15 @@
 package codesnippet.spring.event;
 
-import java.lang.invoke.MethodHandles;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 
-import codesnippet.java_utility.Slf4jLogger;
-
 @Component
 public class CustomSpringEventPublisher
 {
-	private final static Slf4jLogger LOGGER =
-		new Slf4jLogger(MethodHandles.lookup().lookupClass());
+	private static final Logger LOGGER = LogManager.getLogger();
 
 	@Autowired
 	private ApplicationEventPublisher applicationEventPublisher;

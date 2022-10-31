@@ -1,22 +1,26 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.4</version>
+        <relativePath />
+        <!-- lookup parent from repository -->
+    </parent>
+
 	<groupId>codesnippet.spring.event</groupId>
 	<artifactId>event_listener</artifactId>
+	<version>1.0-SNAPSHOT</version>
 
 	<packaging>jar</packaging>
 
 	<name>event_listener</name>
-	<version>1.0-SNAPSHOT</version>
-	<url>http://maven.apache.org</url>
 
 	<properties>
 		<java.version>11</java.version>
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
-
-		<spring-boot-starter>2.5.6</spring-boot-starter>
-
 		<classpath>libs</classpath>
 		<main_class>codesnippet.spring.event.App</main_class>
 	</properties>
@@ -71,12 +75,10 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
-			<version>${spring-boot-starter}</version>
 		</dependency>
-		<dependency>
-			<groupId>codesnippet.java_utility</groupId>
-			<artifactId>logger</artifactId>
-			<version>1.0-SNAPSHOT</version>
-		</dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-log4j2</artifactId>
+        </dependency>
 	</dependencies>
 </project>
