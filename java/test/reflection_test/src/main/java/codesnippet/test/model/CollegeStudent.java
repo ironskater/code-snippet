@@ -1,6 +1,6 @@
 package codesnippet.test.model;
 
-public class CollegeStudent implements Student {
+public class CollegeStudent implements Student, ImmutableStudent {
 
     private int id;
     private String firstname;
