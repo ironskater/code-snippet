@@ -1,0 +1,29 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="0" author="Hyde" logicalFilePath="changeLog/insert_then_get_id.xml">
+        <tagDatabase tag="0" />
+    </changeSet>
+
+    <changeSet id="1" author="Hyde" logicalFilePath="changeLog/insert_then_get_id.xml">
+        <sql>
+            CREATE TABLE "user" (
+                id int8 NOT NULL GENERATED ALWAYS AS IDENTITY,
+                username varchar(20) NOT NULL,
+                password varchar(20) NOT NULL,
+
+                CONSTRAINT user_pk PRIMARY KEY(id)
+            );
+
+            CREATE INDEX username_idx
+            ON "user" (username);
+        </sql>
+        <rollback>
+            DROP TABLE IF EXISTS "user";
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

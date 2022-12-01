@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="codesnippet.spring.mybatis.persistence.mapper.UserMapper">
+
+    <select id="findById" resultType="codesnippet.spring.mybatis.persistence.po.UserPo">
+        SELECT * FROM user WHERE id = #{id};
+    </select>
+
+    <insert id="batchInsert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user (username, password)
+        VALUES
+        <foreach collection="userPos" item="user" index="idx" separator=",">
+            (#{user.username}, #{idx})
+        </foreach>
+    </insert>
+
+    <insert id="batchInsertByMap">
+        INSERT INTO user (username, password)
+        VALUES
+        <foreach collection="userPosByUsername" item="val" index="key" separator=",">
+            (#{key}, #{val.password})
+        </foreach>
+    </insert>
+
+    <insert id="batchInsertByEntrySet">
+        INSERT INTO user (username, password)
+        VALUES
+        <foreach collection="pwByUsername.entrySet()" index="key" item="val" separator=",">
+            (#{key}, #{val})
+        </foreach>
+    </insert>
+
+    <update id="batchUpdate">
+        UPDATE user
+        <trim prefix="SET" suffixOverrides=",">
+            <trim prefix="username = CASE" suffix="END,">
+                <foreach collection="updatedUserPos" item="item">
+                    WHEN id = #{item.id}
+                    THEN #{item.username}
+                </foreach>
+            </trim>
+            <trim prefix="password = CASE" suffix="END,">
+                <foreach collection="updatedUserPos" item="item">
+                    WHEN id = #{item.id}
+                    THEN #{item.password}
+                </foreach>
+            </trim>
+        </trim>
+        <where>
+            id IN
+            <foreach collection="updatedUserPos" item="item" separator="," open="(" close=")">
+                #{item.id}
+            </foreach>
+        </where>
+    </update>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user (username, password)
+        VALUES
+            (#{username}, #{password})
+    </insert>
+
+</mapper>
