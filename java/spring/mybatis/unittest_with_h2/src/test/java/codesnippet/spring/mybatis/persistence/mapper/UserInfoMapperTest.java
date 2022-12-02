@@ -4,10 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mybatis.spring.annotation.MapperScan;
 import org.mybatis.spring.boot.test.autoconfigure.AutoConfigureMybatis;
@@ -15,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.transaction.annotation.Transactional;
 
 import codesnippet.spring.mybatis.persistence.po.UserInfoPo;
 
@@ -22,6 +20,7 @@ import codesnippet.spring.mybatis.persistence.po.UserInfoPo;
 @ExtendWith(SpringExtension.class)
 @MapperScan("codesnippet.spring.mybatis.persistence.mapper")
 @TestPropertySource("/application-test.properties")
+@Transactional
 public class UserInfoMapperTest {
 
     @Autowired
