@@ -58,6 +58,6 @@ public class AppTest {
         assertEquals(100, this.applicationServiceImpl.addGradeResultsForSingleClass(studentGrades.getMathGradeResults()));
 
         // verify is used to verify the DAO method was called
-        verify(applicationDao, times(2)).addGradeResultsForSingleClass(studentGrades.getMathGradeResults());
+        verify(applicationDao, times(1)).addGradeResultsForSingleClass(studentGrades.getMathGradeResults());
     }
 }
