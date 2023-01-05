@@ -7,20 +7,33 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mybatis.spring.annotation.MapperScan;
-import org.mybatis.spring.boot.test.autoconfigure.AutoConfigureMybatis;
+import org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
+import codesnippet.spring.mybatis.TestTransactionConfig;
 import codesnippet.spring.mybatis.persistence.po.UserInfoPo;
 
-@AutoConfigureMybatis
 @ExtendWith(SpringExtension.class)
+@ContextConfiguration(classes = {
+    DataSourceAutoConfiguration.class,
+    MybatisAutoConfiguration.class,
+    TestTransactionConfig.class
+})
 @MapperScan("codesnippet.spring.mybatis.persistence.mapper")
 @TestPropertySource("/application-test.properties")
 @Transactional
+// 以下設定需要mybatis-spring-boot-starter-test依賴--------------------------------
+// @AutoConfigureMybatis
+// @ExtendWith(SpringExtension.class)
+// @MapperScan("codesnippet.spring.mybatis.persistence.mapper")
+// @TestPropertySource("/application-test.properties")
+// @Transactional
 public class UserInfoMapperTest {
 
     @Autowired
