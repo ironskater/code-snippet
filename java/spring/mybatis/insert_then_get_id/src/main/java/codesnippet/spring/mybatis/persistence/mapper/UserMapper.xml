@@ -4,11 +4,11 @@
 <mapper namespace="codesnippet.spring.mybatis.persistence.mapper.UserMapper">
 
     <select id="findById" resultType="codesnippet.spring.mybatis.persistence.po.UserPo">
-        SELECT * FROM user WHERE id = #{id};
+        SELECT * FROM `user` WHERE id = #{id};
     </select>
 
     <insert id="batchInsert" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO user (username, password)
+        INSERT INTO `user` (username, password)
         VALUES
         <foreach collection="userPos" item="user" index="idx" separator=",">
             (#{user.username}, #{idx})
@@ -16,7 +16,7 @@
     </insert>
 
     <insert id="batchInsertByMap">
-        INSERT INTO user (username, password)
+        INSERT INTO `user` (username, password)
         VALUES
         <foreach collection="userPosByUsername" item="val" index="key" separator=",">
             (#{key}, #{val.password})
@@ -24,7 +24,7 @@
     </insert>
 
     <insert id="batchInsertByEntrySet">
-        INSERT INTO user (username, password)
+        INSERT INTO `user` (username, password)
         VALUES
         <foreach collection="pwByUsername.entrySet()" index="key" item="val" separator=",">
             (#{key}, #{val})
@@ -32,7 +32,7 @@
     </insert>
 
     <update id="batchUpdate">
-        UPDATE user
+        UPDATE `user`
         <trim prefix="SET" suffixOverrides=",">
             <trim prefix="username = CASE" suffix="END,">
                 <foreach collection="updatedUserPos" item="item">
@@ -56,7 +56,7 @@
     </update>
 
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO user (username, password)
+        INSERT INTO `user` (username, password)
         VALUES
             (#{username}, #{password})
     </insert>

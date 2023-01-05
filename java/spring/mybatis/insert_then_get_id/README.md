@@ -1,1 +1,1 @@
-* 該範例以MySQL當作外部DB
+* 該範例使用in-memory h2 DB

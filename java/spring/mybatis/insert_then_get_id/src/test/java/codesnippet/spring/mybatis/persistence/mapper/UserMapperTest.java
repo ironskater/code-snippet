@@ -10,22 +10,28 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mybatis.spring.annotation.MapperScan;
-import org.mybatis.spring.boot.test.autoconfigure.AutoConfigureMybatis;
+import org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
+import codesnippet.spring.mybatis.TestTransactionConfig;
 import codesnippet.spring.mybatis.UserService;
 import codesnippet.spring.mybatis.persistence.po.UserPo;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {UserService.class})
-@TestPropertySource("/application-test.properties")
-@AutoConfigureMybatis
+@ContextConfiguration(classes = {
+    DataSourceAutoConfiguration.class,
+    MybatisAutoConfiguration.class,
+    TestTransactionConfig.class,
+    UserService.class
+})
 @MapperScan("codesnippet.spring.mybatis.persistence.mapper")
+@TestPropertySource("/application-test.properties")
 @Transactional
 public class UserMapperTest {
 
@@ -36,6 +42,7 @@ public class UserMapperTest {
     private UserService userService;
 
     @Test
+    @Sql("/db/schema.sql")
     // @Rollback(false)
     public void testFindById() {
 
@@ -54,6 +61,7 @@ public class UserMapperTest {
     }
 
     @Test
+    @Sql("/db/schema.sql")
     public void testBatchInsert_insertDataNormally_thenGetIncrementId() {
 
         UserPo userPo1 = new UserPo(null, "user1", "pw1");
@@ -75,6 +83,7 @@ public class UserMapperTest {
     }
 
     @Test
+    @Sql("/db/schema.sql")
     public void testBatchInsertByMap_insertDataNormally_thenGetIncrementId() {
 
         UserPo userPo1 = new UserPo(null, "user1", "pw1");
@@ -95,6 +104,7 @@ public class UserMapperTest {
     }
 
     @Test
+    @Sql("/db/schema.sql")
     public void testBatchInsertByEntrySet_insertDataNormally_thenGetIncrementId() {
 
         UserPo userPo1 = new UserPo(null, "user1", "pw1");
@@ -115,6 +125,7 @@ public class UserMapperTest {
     }
 
     @Test
+    @Sql("/db/schema.sql")
     public void testBatchUpdate() {
 
         UserPo userPo1 = new UserPo(4L, "update1", "updatePw1");
