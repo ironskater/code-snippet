@@ -1,0 +1,137 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.4</version>
+        <relativePath />
+        <!-- lookup parent from repository -->
+    </parent>
+
+    <groupId>codesnippet.spring.feign</groupId>
+    <artifactId>request_line</artifactId>
+    <version>1.0</version>
+
+    <packaging>jar</packaging>
+
+    <name>request_line</name>
+
+    <properties>
+        <java.version>11</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <!-- <spring-cloud-starter-openfeign>4.0.0</spring-cloud-starter-openfeign> -->
+        <feign-core>12.1</feign-core>
+        <feign-jackson>12.1</feign-jackson>
+        <wiremock>2.27.2</wiremock>
+    </properties>
+
+    <build>
+        <plugins>
+            <!-- To generate unit test report, we need to add this plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <!-- <version>3.0.0-M5</version> -->
+                <configuration>
+                    <!-- By default, Maven Surefire plugin will NOT generate reports if tests fail -->
+                    <!-- Add this config, so that we can generate report whether tests pass or fail -->
+                    <testFailureIgnore>true</testFailureIgnore>
+                    <!-- By default, Maven Surefire plugin will NOT show @DisplayName in reports -->
+                    <!-- To show @DisplayName in reports -->
+                    <statelessTestsetReporter implementation="org.apache.maven.plugin.surefire.extensions.junit5.JUnit5Xml30StatelessReporter">
+                        <usePhrasedTestCaseMethodName>true</usePhrasedTestCaseMethodName>
+                    </statelessTestsetReporter>
+                </configuration>
+            </plugin>
+
+            <!-- To generate unit test report, we need to add this plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+                <!-- <version>3.0.0-M5</version> -->
+                <executions>
+                    <execution>
+                        <!-- Tell maven during test phase, execute the plugin goal:report to generate HTML reports -->
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- jacoco: java code coverage -->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <!-- <version>0.8.7</version> -->
+                <executions>
+                    <!-- Prepare jacoco agent, this goal is bound by default to Maven's initialize phase -->
+                    <execution>
+                        <id>jacoco-prepare</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <!-- During maven test phase, execute the plugin goal: jacoco-maven-plugin:report -->
+                    <execution>
+                        <id>jacoco-report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <version>${spring-cloud-starter-openfeign}</version>
+        </dependency> -->
+
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-core</artifactId>
+            <version>${feign-core}</version>
+        </dependency>
+
+        <!-- 原生feign-core不支持json編碼，需使用此lib -->
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-jackson</artifactId>
+            <version>${feign-jackson}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.tomakehurst</groupId>
+            <artifactId>wiremock</artifactId>
+            <version>${wiremock}</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+</project>
