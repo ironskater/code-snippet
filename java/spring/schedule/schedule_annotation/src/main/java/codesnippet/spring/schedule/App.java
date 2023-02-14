@@ -1,7 +1,5 @@
 package codesnippet.spring.schedule;
 
-import java.lang.invoke.MethodHandles;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -10,16 +8,11 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.Scheduled;
 
-import codesnippet.java_utility.Slf4jLogger;
-
 @ComponentScan
 @EnableAsync
 @EnableConfigurationProperties(codesnippet.spring.schedule.AppProp.class)
 public class App
 {
-	private static final Slf4jLogger LOGGER =
-		new Slf4jLogger(MethodHandles.lookup().lookupClass());
-
 	public static void
 		main( String[] args )
 	{
@@ -27,7 +20,7 @@ public class App
 				SpringApplication.run(	App.class,
 										args))
 		{
-			LOGGER.info("hello world");
+			System.out.println("hello world");
 
 			while(true)
 			{
@@ -36,7 +29,7 @@ public class App
 		}
 		catch(Exception ex)
 		{
-			LOGGER.error("Activation Failed", ex);
+			System.out.println("Activation Failed");
 		}
 	}
 
@@ -59,7 +52,7 @@ public class App
 	public void
 		scheduleFixedRateTaskAsync() throws InterruptedException
 	{
-		LOGGER.info(
+		System.out.println(
 			"Fixed rate task async - " + System.currentTimeMillis() / 1000);
 		Thread.sleep(5000);
 	}
