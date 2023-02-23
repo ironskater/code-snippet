@@ -17,7 +17,7 @@
 
 		<spring-boot-starter>2.6.4</spring-boot-starter>
 		<hibernate-core.version>5.6.7.Final</hibernate-core.version>
-		<postgresql-driver>42.3.3</postgresql-driver>
+		<postgresql-driver>42.3.8</postgresql-driver>
 
 		<classpath>libs</classpath>
 		<main_class>codesnippet.spring.rest.App</main_class>
