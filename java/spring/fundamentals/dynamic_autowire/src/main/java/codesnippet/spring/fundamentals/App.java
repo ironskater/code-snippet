@@ -1,19 +1,17 @@
 package codesnippet.spring.fundamentals;
 
-import java.lang.invoke.MethodHandles;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 
-import codesnippet.java_utility.Slf4jLogger;
 import codesnippet.spring.fundamentals.service.CustomMapFromListDynamicAutowireService;
 
 @ComponentScan
 public class App
 {
-    private final static Slf4jLogger LOGGER =
-        new Slf4jLogger(MethodHandles.lookup().lookupClass());
+    private static final Logger LOGGER = LogManager.getLogger();
 
     public static void
         main( String[] args )
@@ -26,8 +24,8 @@ public class App
                 ctx.getBean("customMapFromListDynamicAutowireService",
                             CustomMapFromListDynamicAutowireService.class);
 
-            LOGGER.info("is US server alive? " + service.isServerActive("US", 1));
-            LOGGER.info("is GB server alive? " + service.isServerActive("GB", 1));
+            LOGGER.info("is US server alive? {}", service.isServerActive("US", 1));
+            LOGGER.info("is GB server alive? {}", service.isServerActive("GB", 1));
         }
     }
 }

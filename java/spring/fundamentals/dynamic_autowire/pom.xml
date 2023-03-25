@@ -73,10 +73,5 @@
 			<artifactId>spring-boot-starter</artifactId>
 			<version>${spring-boot-starter}</version>
 		</dependency>
-		<dependency>
-			<groupId>codesnippet.java_utility</groupId>
-			<artifactId>logger</artifactId>
-			<version>1.0-SNAPSHOT</version>
-		</dependency>
 	</dependencies>
 </project>
