@@ -2,6 +2,7 @@ package codesnippet.spring.cache;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -28,13 +29,15 @@ public class CacheConfig {
             Cache<Object, Object> caffeineCache =
                 Caffeine.newBuilder()
                     .recordStats()
+                    .expireAfterWrite(cacheBean.getExpireAfterWrite(), TimeUnit.SECONDS)
                     .refreshAfterWrite(cacheBean.getRefreshAfterWrite(), TimeUnit.SECONDS)
                     .maximumSize(cacheBean.getMaximumSize())
                     .build(key -> {
 
-                        Thread.sleep(5000);
+                        // Thread.sleep(5000);
 
-                        logger.info("data refreshed for id[{}]", key);
+                        logger.info("data refreshed for id[{}], data version[{}]", key,
+                            new Random().nextInt(100));
 
                         return new StudentDto((Long)key, "firstName" + key, "lastName" + key);
                     });
@@ -51,7 +54,7 @@ public class CacheConfig {
 
         CacheBean userCache = new CacheBean();
         userCache.setKey("userCache");
-        userCache.setExpireAfterWrite(5);
+        userCache.setExpireAfterWrite(10);
         userCache.setRefreshAfterWrite(5);
         userCache.setMaximumSize(10000);
 
