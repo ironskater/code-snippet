@@ -1,0 +1,1 @@
+* This example shows how to instantiate and manage an external Apache Kafka broker hosted inside a Docker container from our integration test.

@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">    <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -9,36 +8,28 @@
         <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>codesnippet.spring.mybatis</groupId>
-    <artifactId>unittest_with_h2</artifactId>
+    <groupId>codesnippet.spring.feign</groupId>
+    <artifactId>openfeign_interceptor</artifactId>
     <version>1.0</version>
 
     <packaging>jar</packaging>
 
-    <name>unittest_with_h2</name>
+    <name>openfeign_interceptor</name>
 
     <properties>
         <java.version>11</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
-        <mybatis-spring-boot-starter>2.2.2</mybatis-spring-boot-starter>
+
+        <!-- 4.0.0 needs java17 -->
+        <spring-cloud-starter-openfeign>3.1.5</spring-cloud-starter-openfeign>
+
+        <feign-okhttp>12.1</feign-okhttp>
+        <feign-httpclient>12.1</feign-httpclient>
+        <wiremock>2.27.2</wiremock>
     </properties>
 
     <build>
-        <sourceDirectory>src/main/java</sourceDirectory>
-        <testSourceDirectory>src/test/java</testSourceDirectory>
-        <resources>
-            <resource>
-                <directory>${project.basedir}/src/main/resources</directory>
-            </resource>
-            <resource>
-                <directory>src/main/java</directory>
-                <includes>
-                    <include>**/*.xml</include>
-                </includes>
-            </resource>
-        </resources>
-
         <plugins>
             <!-- To generate unit test report, we need to add this plugin -->
             <plugin>
@@ -100,6 +91,12 @@
     </build>
 
     <dependencies>
+
+        <!-- <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency> -->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -113,22 +110,35 @@
         </dependency>
 
         <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>${mybatis-spring-boot-starter}</version>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <version>${spring-cloud-starter-openfeign}</version>
         </dependency>
 
-        <!-- Add this dependency for @AutoConfigureMybatis, but we don't really need it -->
         <!-- <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter-test</artifactId>
-            <version>${mybatis-spring-boot-starter}</version>
-            <scope>test</scope>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-okhttp</artifactId>
+            <version>${feign-okhttp}</version>
+        </dependency> -->
+
+        <!-- <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-httpclient</artifactId>
+            <version>${feign-httpclient}</version>
+        </dependency> -->
+
+        <!-- <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-dependencies</artifactId>
+            <version>2022.0.0</version>
+            <type>pom</type>
+            <scope>import</scope>
         </dependency> -->
 
         <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
+            <groupId>com.github.tomakehurst</groupId>
+            <artifactId>wiremock</artifactId>
+            <version>${wiremock}</version>
             <scope>test</scope>
         </dependency>
 
