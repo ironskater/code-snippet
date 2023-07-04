@@ -18,8 +18,7 @@ public class App
         }
 
         @Override
-        public Integer
-            call()
+        public Integer call()
         {
             try {
                 Thread.sleep(5000);
@@ -38,15 +37,9 @@ public class App
         ExecutorService executor = Executors.newSingleThreadExecutor();
         Future<Integer> future1 = executor.submit(new PrintTask(5566));
 
-        Future<Integer> future2 = executor.submit(new Callable<Integer>() {
-
-            @Override
-            public Integer
-                call() throws Exception
-            {
-                System.out.println("hello baby world");
-                return 2266;
-            }
+        Future<Integer> future2 = executor.submit( () -> {
+            System.out.println("hello baby world");
+            return 2266;
         });
 
         System.out.println("waiting for result...");
