@@ -1,46 +1,36 @@
 package codesnippet.concurrent;
 
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class App
 {
-    static CountDownLatch countDownLatch = new CountDownLatch(2);
-
     public static void
-        main( String[] args ) throws InterruptedException
+        main( String[] args ) throws InterruptedException, ExecutionException
     {
-        getThread1().start();
-        getThread2().start();
-        countDownLatch.await();
-        System.out.println("start main task");
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+
+        Future<Integer> result = App.calculateSquare(executor, 64);
+
+        System.out.println("Waiting for result");
+
+        while(!result.isDone()) {
+            System.out.println("Waiting for result is done");
+            Thread.sleep(100);
+        }
+
+        System.out.println("Result is " + result.get());
+
+        executor.shutdown();
     }
 
-    private static Thread
-        getThread1()
-    {
-        return new Thread(() -> {
-            try {
-                TimeUnit.SECONDS.sleep(5);
-                System.out.println("thread1 init complete");
-                countDownLatch.countDown();
-            } catch(InterruptedException ex) {
+    private static Future<Integer> calculateSquare(ExecutorService executor, int input) {
 
-            }
-        });
-    }
-
-    private static Thread
-        getThread2()
-    {
-        return new Thread(() -> {
-            try {
-                TimeUnit.SECONDS.sleep(3);
-                System.out.println("thread2 init complete");
-                countDownLatch.countDown();
-            } catch(InterruptedException ex) {
-
-            }
+        return executor.submit(() -> {
+            Thread.sleep(1000);
+            return input * input;
         });
     }
 }
