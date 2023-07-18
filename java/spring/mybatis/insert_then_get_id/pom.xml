@@ -21,7 +21,7 @@
         <java.version>11</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
-        <postgresql-driver>42.5.0</postgresql-driver>
+        <postgresql-driver>42.5.1</postgresql-driver>
         <mysql-driver>8.0.31</mysql-driver>
         <mybatis-spring-boot-starter>2.2.2</mybatis-spring-boot-starter>
     </properties>
