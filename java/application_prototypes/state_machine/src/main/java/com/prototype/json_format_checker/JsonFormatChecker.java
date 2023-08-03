@@ -25,6 +25,8 @@ public class JsonFormatChecker implements FiniteStateMachine {
 
     public static FiniteStateMachine buildJsonFormatChecker() {
 
+        // {\"key\":\"value\"}
+
         State initialState = new StateImpl();
         State second = new StateImpl();
         State third = new StateImpl();

@@ -23,5 +23,33 @@ public class Application
         } else {
             System.out.println("The json format is wrong");
         }
+
+        json = "{\"key1\":\"value1\",\"key2\":\"value2\"}";
+
+        machine = JsonFormatChecker.buildJsonFormatChecker();
+
+        for (int ix = 0; ix < json.length(); ix++) {
+            machine = machine.switchState(String.valueOf(json.charAt(ix)));
+        }
+
+        if (machine.canStop()) {
+            System.out.println("The json format is right");
+        } else {
+            System.out.println("The json format is wrong");
+        }
+
+        json = "{\"key\"\"value\"}";
+
+        machine = JsonFormatChecker.buildJsonFormatChecker();
+
+        for (int ix = 0; ix < json.length(); ix++) {
+            machine = machine.switchState(String.valueOf(json.charAt(ix)));
+        }
+
+        if (machine.canStop()) {
+            System.out.println("The json format is right");
+        } else {
+            System.out.println("The json format is wrong");
+        }
     }
 }
