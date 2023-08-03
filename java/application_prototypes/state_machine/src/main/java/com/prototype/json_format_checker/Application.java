@@ -2,6 +2,10 @@ package com.prototype.json_format_checker;
 
 import com.prototype.state_machine.FiniteStateMachine;
 
+/**
+ * Refer to https://www.baeldung.com/java-finite-automata
+ * Validating Input with Finite Automata in Java
+ */
 public class Application
 {
     public static void main(String[] args) {

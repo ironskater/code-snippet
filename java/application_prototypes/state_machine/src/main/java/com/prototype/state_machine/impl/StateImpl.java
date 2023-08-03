@@ -1,10 +1,9 @@
-package com.prototype.json_format_checker;
-
-import java.util.ArrayList;
-import java.util.List;
+package com.prototype.state_machine.impl;
 
 import com.prototype.state_machine.State;
 import com.prototype.state_machine.Transition;
+import java.util.ArrayList;
+import java.util.List;
 
 public class StateImpl implements State {
 
