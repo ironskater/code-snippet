@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>匯率即時推送</title>
+    <script>
+        function connectToSSE() {
+            const eventSource = new EventSource('http://localhost:8080/api/rates');
+
+            eventSource.addEventListener('rate-update', (event) => {
+                const rate = JSON.parse(event.data);
+                updateUI(rate);
+            });
+
+            eventSource.onerror = (error) => {
+                console.error('SSE Error:', error);
+                eventSource.close();
+                setTimeout(connectToSSE, 5000); // 5秒後重試
+            };
+        }
+
+        function updateUI(rate) {
+            const rateDiv = document.getElementById('rate');
+            rateDiv.innerHTML = `
+                <p>幣別: ${rate.currency}</p>
+                <p>匯率: ${rate.rate}</p>
+                <p>時間: ${rate.timestamp}</p>
+            `;
+        }
+
+        window.onload = connectToSSE;
+    </script>
+</head>
+<body>
+    <h1>即時匯率</h1>
+    <div id="rate"></div>
+</body>
+</html>
