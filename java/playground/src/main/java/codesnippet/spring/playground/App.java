@@ -1,68 +1,54 @@
 package codesnippet.spring.playground;
 
-import java.util.concurrent.ThreadPoolExecutor;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.scheduling.annotation.EnableAsync;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
-
-/**
- * REF: https://juejin.cn/post/6844903621822251021
- */
-@SpringBootApplication
-@EnableAsync
 public class App {
 
+    static class Account{
+        double getBalance(){
+           return 0;
+        }
+    }
+
+    static class SavingsAccount extends Account {
+        double getSavings() {
+            return 100;
+        }
+    }
+    static class TermAccount extends Account {
+        double getTermAccount() {
+            return 1000;
+        }
+    }
+    static class CurrentAccount extends Account {
+        double getCurrentAccount() {
+            return 10000;
+        }
+    }
+
     public static void main(String[] args) {
-        SpringApplication.run(App.class, args);
+
+        System.out.println(processInputNew("yess"));
     }
 
-    @Bean
-    public ThreadPoolTaskExecutor testExecutor() {
-        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        executor.setCorePoolSize(1);
-        executor.setMaxPoolSize(1);
-        executor.setQueueCapacity(10000);
-        executor.setAllowCoreThreadTimeOut(true);
-        executor.setThreadNamePrefix("push-log-inser-dbt-task-pool-");
-        executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
-        executor.initialize();
-        return executor;
-    }
-
-    @Bean
-    CommandLineRunner execute(ThreadPoolTaskExecutor testExecutor) {
-
-        return args -> {
-            testExecutor.execute(() -> {
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException ex) {
-
-                }
-
-                System.out.println("execute 1");
-            });
-
-            testExecutor.execute(new Runnable() {
-
-                @Override
-                public void run() {
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException ex) {
-
-                    }
-
-                    System.out.println("execute 2");
-                    testExecutor.shutdown();
-                }
-            });
-
-            System.out.println(args[0]);
-            System.out.println(args[1]);
+    static double getBalanceWithSwitchPattern(Account account) {
+        double result = 0;
+        switch (account) {
+            case null -> throw new RuntimeException("Oops, account is null");
+            case SavingsAccount sa -> result = sa.getSavings();
+            case TermAccount ta -> result = ta.getTermAccount();
+            case CurrentAccount ca -> result = ca.getCurrentAccount();
+            default -> result = account.getBalance();
         };
+        return result;
+    }
+
+    static String processInputNew(String input) {
+        String output = null;
+        switch(input) {
+            case null -> output = "Oops, null";
+            case String s when "Yes".equalsIgnoreCase(s) -> output = "It's Yes";
+            case String s when "No".equalsIgnoreCase(s) -> output = "It's No";
+            default -> output = "Unknown input";
+        }
+        return output;
     }
 }
