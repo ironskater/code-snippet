@@ -1,4 +1,4 @@
-package codesnippet.spring.serversentevent.webflux;
+package codesnippet.spring.webflux.invoke_reactive_api;
 
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
+@EnableScheduling
 @Slf4j
 public class App
 {
