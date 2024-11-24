@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+
+// 指定生成的 Java 類的包名
+//生成的所有 Java 類都會放在這個包下
+option java_package = "codesnippet.spring.grpc.bidirectional_stream.stream_common.stubs";
+
+// 設置為 true 時，每個消息和服務都會生成獨立的 Java 文件
+// 設置為 false 時，所有消息和服務都會放在一個 Java 文件中
+option java_multiple_files = true;
+
+message HelloWorldRequest {
+    /**
+    * 定義一個可選的字符串字段 name
+    * 1 是字段編號，用於在序列化時標識字段
+    */
+    string name = 1;
+    google.protobuf.Int32Value age = 2;
+}
+
+message HelloWorldResponse {
+    /**
+    * 定義一個必須的字符串字段 greeting
+    * 1 是字段編號，用於在序列化時標識字段
+    */
+    string greeting = 1;
+    google.protobuf.Timestamp timestamp = 2;
+}
+
+/**
+* 定義 gRPC 服務
+* 這會生成服務相關的 Java 類
+*/
+service HelloWorldService {
+
+  /**
+  * 定義一個 RPC 方法 SayHello
+  * stream 關鍵字表示這是雙向流式 RPC
+  * 這會生成對應的 Java 方法
+  */
+  rpc SayHello(stream HelloWorldRequest) returns (stream HelloWorldResponse);
+}

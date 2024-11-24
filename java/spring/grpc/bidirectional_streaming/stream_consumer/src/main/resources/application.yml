@@ -1,0 +1,5 @@
+grpc:
+  client:
+    hello:
+      address: localhost:5566
+      negotiation-type: plaintext
