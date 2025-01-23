@@ -10,22 +10,20 @@ package snippetlab.java.design_pattern.decorator;
  *
  * https://www.tutorialspoint.com/design_pattern/decorator_pattern.htm
  */
-public class App
-{
-	public static void
-		main( String[] args )
-	{
-		IShape circle = new Circle();
-		IShape redCircle = new RedShapeDecorator(new Circle());
-		IShape redRectangle = new RedShapeDecorator(new Rectangle());
+public class App {
 
-		System.out.println("Circle with normal border");
-		circle.draw();
+    public static void main( String[] args ) {
 
-		System.out.println("\nCircle of red border");
-		redCircle.draw();
+        Coffee simpleCoffee = new SimpleCoffee();
+        Coffee milkCoffee = new MilkDecorator(simpleCoffee);
+        Coffee sugarMilkCoffee = new SugarDecorator(milkCoffee);
 
-		System.out.println("\nRectangle of red border");
-		redRectangle.draw();
-	}
+        double simpleCoffeeCost = simpleCoffee.getCost();
+        double milkCoffeeCost = milkCoffee.getCost();
+        double sugarMilkCoffeeCost = sugarMilkCoffee.getCost();
+
+        System.out.println(simpleCoffee.getDescription() + " $" + simpleCoffeeCost);
+        System.out.println(milkCoffee.getDescription() + " $" + milkCoffeeCost);
+        System.out.println(sugarMilkCoffee.getDescription() + " $" + sugarMilkCoffeeCost);
+    }
 }
